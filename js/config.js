@@ -6,6 +6,7 @@ window.SUNDUS_CONFIG = {
   tiktok: "https://www.tiktok.com/@sundus.fashionn",
   pinterest: "https://www.pinterest.com/sundusfashionn",
   currency: "€",
+  adminUser: "sundus",
   adminPassword: "sundus2026",
 
   ai: {

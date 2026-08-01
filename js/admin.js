@@ -16,8 +16,9 @@
   }
 
   async function tryLogin() {
+    const user = $("username").value.trim();
     const pw = $("password").value;
-    if (pw === C.adminPassword) {
+    if (user === C.adminUser && pw === C.adminPassword) {
       sessionStorage.setItem("sundus_admin", "1");
       isLogged = true;
       showApp();
@@ -484,6 +485,7 @@ Be elegant, modest-fashion aware, pastel-inspired. Never mention the file name.`
     if (isLogged) { showApp(); loadDraft(); }
 
     $("btn-login").addEventListener("click", tryLogin);
+    $("username").addEventListener("keydown", (e) => { if (e.key === "Enter") $("password").focus(); });
     $("password").addEventListener("keydown", (e) => { if (e.key === "Enter") tryLogin(); });
     $("btn-logout").addEventListener("click", () => { sessionStorage.removeItem("sundus_admin"); location.reload(); });
 
