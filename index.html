@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sundus — La soie fine du paradis</title>
+  <meta name="description" content="Sundus — créations délicates et féminines pour la femme moderne. La soie fine du paradis.">
+  <meta property="og:title" content="Sundus — La soie fine du paradis">
+  <meta property="og:description" content="Sundus — créations délicates et féminines pour la femme moderne. La soie fine du paradis.">
+  <meta property="og:image" content="assets/logo.png">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+
+  <header id="header">
+    <a href="#" class="brand"><img src="assets/logo.svg" alt="Sundus"><span>SUNDUS</span></a>
+    <nav>
+      <a href="#collection" data-i18n="nav_shop">Collection</a>
+      <a href="#about" data-i18n="nav_about">À propos</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
+      <a href="admin.html" data-i18n="nav_admin">Espace créatrice</a>
+    </nav>
+    <div class="lang-switch">
+      <button data-lang-btn="fr">FR</button>
+      <button data-lang-btn="en">EN</button>
+      <button data-lang-btn="ar">عربي</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="hero-badge">✦ <span data-i18n="hero_badge">Nouvelle collection 2026</span></span>
+    <h1>
+      <span data-i18n="hero_title1">La soie fine du</span><br>
+      <span class="grad" data-i18n="hero_title2">paradis, cousue pour vous</span>
+    </h1>
+    <p data-i18n="hero_sub">Sundus, la soie fine du paradis, tisse des pièces délicates et féminines pour la femme moderne. Douceur, élégance et modestie.</p>
+    <div class="hero-actions">
+      <a href="#collection" class="btn btn-primary"><span data-i18n="hero_cta">Découvrir la collection</span> ✦</a>
+      <a href="#contact" class="btn btn-ghost" data-i18n="hero_cta2">Nous écrire</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><b>Sundus</b><span data-i18n="stats_pieces">pièces uniques</span></div>
+      <div class="stat"><b>100%</b><span data-i18n="stats_love">clientes satisfaites</span></div>
+      <div class="stat"><b>❤</b><span data-i18n="stats_craft">fait main avec amour</span></div>
+    </div>
+  </section>
+
+  <div class="moon-divider">
+    <svg viewBox="0 0 100 60" fill="none"><path d="M50 5 C 80 5 95 30 95 55 C 60 55 5 55 5 55 C 5 30 20 5 50 5 Z" fill="#F9C6E0" opacity="0.5"/></svg>
+  </div>
+
+  <section id="collection">
+    <div class="section-head reveal">
+      <h2 data-i18n="collection_title">La Collection</h2>
+      <p data-i18n="collection_sub">Chaque pièce Sundus est imaginée, dessinée et réalisée avec soin.</p>
+    </div>
+    <div class="filters reveal" id="filters"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="about" class="about-grid">
+    <div class="about-visual reveal">
+      <img src="assets/logo.svg" alt="Sundus" style="width:100%;max-width:420px;margin:0 auto;">
+      <div class="about-float"><b>Sundus</b><span data-i18n="stats_pieces">pièces uniques</span></div>
+    </div>
+    <div class="about-text reveal">
+      <h2 data-i18n="about_title">L'histoire de Sundus</h2>
+      <p data-i18n="about_p1">Sundus signifie « soie fine du paradis » en arabe. C'est l'histoire d'une jeune créatrice qui tisse douceur, élégance et modernité pour la femme d'aujourd'hui.</p>
+      <p data-i18n="about_p2">Chaque création est pensée pour sublimer celle qui la porte, avec des matières nobles, des couleurs pastel et le respect de la modestie.</p>
+      <a href="#contact" class="btn btn-primary" style="margin-top:14px" data-i18n="about_cta">Contacter la créatrice</a>
+    </div>
+  </section>
+
+  <div class="cta-section reveal">
+    <h2 data-i18n="cta_title">Prête à briller ?</h2>
+    <p data-i18n="cta_sub">Écrivez-nous pour commander une pièce ou une création sur mesure.</p>
+    <a href="mailto:hello.qamra@gmail.com" class="btn btn-primary" id="cta-mail" data-i18n="cta_btn">Envoyer un email ✦</a>
+  </div>
+
+  <section id="contact">
+    <div class="section-head reveal">
+      <h2 data-i18n="contact_title">Contact</h2>
+      <p data-i18n="contact_sub">Suivez Sundus et écrivez-nous, nous répondons avec le cœur.</p>
+    </div>
+    <div class="socials reveal" id="socials"></div>
+  </section>
+
+  <footer>
+    <div class="brand"><img src="assets/logo.svg" alt="Sundus"><span>SUNDUS</span></div>
+    <p>© 2026 Sundus — <span data-i18n="footer_made">Créé avec amour</span> ✦ <span data-i18n="footer_rights">Tous droits réservés.</span></p>
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" id="lb-close">✕</button>
+    <div class="lightbox-inner">
+      <div class="lightbox-media" id="lb-media"></div>
+      <div class="lightbox-info">
+        <h3 id="lb-title"></h3>
+        <div class="price" id="lb-price"></div>
+        <p class="lb-desc" id="lb-desc"></p>
+        <a class="btn btn-primary" id="lb-order" target="_blank">✦</a>
+        <div class="lb-share" id="lb-share"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/landing.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sundus — Espace créatrice</title>
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { min-height: 100vh; display: flex; flex-direction: column; }
+    .admin-wrap { max-width: 1100px; margin: 0 auto; width: 100%; padding: 110px 5vw 60px; }
+    .admin-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 30px; }
+    .admin-top h1 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--ink); }
+    .admin-card { background: rgba(255, 255, 255, 0.85); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); margin-bottom: 26px; border: 1px solid rgba(201, 139, 185, 0.16); }
+    .admin-card h2 { font-family: var(--font-display); font-size: 1.35rem; color: var(--ink); margin-bottom: 14px; }
+    .dropzone {
+      border: 2.4px dashed rgba(201, 139, 185, 0.5); border-radius: 18px; padding: 44px 20px;
+      text-align: center; transition: all 0.3s; background: var(--rose-soft); cursor: pointer;
+    }
+    .dropzone.drag { border-color: var(--rose); background: #FFF0F7; transform: scale(1.01); box-shadow: 0 0 0 6px rgba(249, 168, 212, 0.18); }
+    .dropzone b { font-size: 1.1rem; color: var(--ink); display: block; margin-bottom: 6px; }
+    .dropzone span { color: var(--ink-soft); font-size: 0.92rem; }
+    .dz-icon { font-size: 2.6rem; margin-bottom: 10px; }
+    .dropzone input { display: none; }
+    .gen-bar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 18px; }
+    .gen-bar select, .gen-bar input[type="text"] {
+      padding: 11px 16px; border-radius: 12px; border: 1.5px solid rgba(92, 75, 99, 0.18);
+      font-family: inherit; font-size: 0.92rem; color: var(--ink); background: #fff; outline: none;
+    }
+    .gen-bar select:focus, .gen-bar input:focus { border-color: var(--rose); }
+    .admin-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 22px; margin-top: 22px; }
+    .item { border: 1px solid rgba(201, 139, 185, 0.2); border-radius: 16px; overflow: hidden; background: #fff; }
+    .item-media { aspect-ratio: 3/4; background: var(--rose-soft); overflow: hidden; }
+    .item-media img, .item-media video { width: 100%; height: 100%; object-fit: cover; }
+    .item-body { padding: 14px; }
+    .item-body label { font-size: 0.74rem; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-soft); display: block; margin: 10px 0 5px; }
+    .item-body input, .item-body textarea, .item-body select {
+      width: 100%; padding: 9px 12px; border-radius: 10px; border: 1.4px solid rgba(92, 75, 99, 0.16);
+      font-family: inherit; font-size: 0.9rem; color: var(--ink); outline: none; background: #FFFDFE; resize: vertical;
+    }
+    .item-body input:focus, .item-body textarea:focus { border-color: var(--rose); }
+    .options-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+    .opt {
+      font-size: 0.78rem; padding: 7px 12px; border-radius: 30px; border: 1.4px solid rgba(92, 75, 99, 0.2);
+      color: var(--ink-soft); transition: all 0.25s; background: #fff;
+    }
+    .opt:hover { border-color: var(--rose); color: var(--rose); transform: translateY(-1px); }
+    .item-del { margin-top: 12px; width: 100%; padding: 8px; border-radius: 10px; background: #FEF2F2; color: #E11D48; font-size: 0.82rem; font-weight: 600; transition: all 0.3s; }
+    .item-del:hover { background: #E11D48; color: #fff; }
+    .login-box {
+      max-width: 420px; margin: 16vh auto 0; text-align: center;
+      background: rgba(255,255,255,0.9); border-radius: var(--radius); padding: 44px 36px; box-shadow: var(--shadow);
+      border: 1px solid rgba(201,139,185,0.16);
+    }
+    .login-box img { width: 90px; margin: 0 auto 18px; border-radius: 50%; box-shadow: var(--shadow); }
+    .login-box h1 { font-family: var(--font-display); color: var(--ink); margin-bottom: 8px; }
+    .login-box input {
+      width: 100%; padding: 14px 18px; border-radius: 14px; border: 1.6px solid rgba(92,75,99,0.2);
+      font-size: 1rem; text-align: center; outline: none; margin: 18px 0 12px;
+    }
+    .login-box input:focus { border-color: var(--rose); }
+    .status { position: fixed; bottom: 26px; right: 26px; background: var(--ink); color: #fff; padding: 13px 22px; border-radius: 40px; font-size: 0.9rem; box-shadow: 0 14px 40px rgba(0,0,0,0.3); opacity: 0; transform: translateY(20px); transition: all 0.4s; z-index: 300; max-width: 340px; }
+    .status.show { opacity: 1; transform: translateY(0); }
+    .hint { font-size: 0.78rem; color: var(--ink-soft); margin-top: 8px; }
+    .ai-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 600; padding: 5px 12px; border-radius: 30px; background: linear-gradient(135deg, rgba(249,168,212,0.2), rgba(196,181,253,0.2)); color: var(--ink); margin-bottom: 10px; }
+    .back-link { font-size: 0.85rem; color: var(--ink-soft); }
+    .back-link:hover { color: var(--rose); }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    @media (max-width: 700px) { .admin-top { flex-direction: column; align-items: flex-start; } }
+  </style>
+</head>
+<body>
+  <div class="orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+
+  <header id="header">
+    <a href="index.html" class="brand"><img src="assets/logo.svg" alt="Qamra"><span>SUNDUS</span></a>
+    <div style="display:flex;align-items:center;gap:16px">
+      <a href="index.html" class="back-link" data-i18n="nav_shop">Collection</a>
+      <div class="lang-switch">
+        <button data-lang-btn="fr">FR</button>
+        <button data-lang-btn="en">EN</button>
+        <button data-lang-btn="ar">عربي</button>
+      </div>
+      <button id="btn-logout" class="btn btn-ghost" style="padding:9px 18px;font-size:0.85rem" hidden data-i18n="admin_logout">Déconnexion</button>
+    </div>
+  </header>
+
+  <div class="admin-wrap" id="admin-wrap" hidden>
+    <div class="admin-top">
+      <div>
+        <h1>✦ <span data-i18n="admin_login_title">Espace créatrice</span></h1>
+        <span class="hint" data-i18n="admin_login_sub">Entrez le mot de passe pour gérer la collection</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="btn-publish" data-i18n="admin_publish">Publier sur la landing</button>
+      </div>
+    </div>
+
+    <div class="admin-card">
+      <span class="ai-badge">✦ <span data-i18n="ai_offline">Mode intelligent hors-ligne</span></span>
+      <h2 data-i18n="admin_upload">Glissez vos photos et vidéos ici</h2>
+      <div class="dropzone" id="dropzone">
+        <div class="dz-icon">🌙</div>
+        <b data-i18n="admin_upload">Glissez vos photos et vidéos ici</b>
+        <span data-i18n="admin_upload_sub">ou cliquez pour choisir — optimisation automatique</span>
+        <input type="file" id="file-input" accept="image/*,video/*" multiple>
+      </div>
+      <div class="gen-bar">
+        <select id="gen-lang">
+          <option value="auto">Auto (3 langues)</option>
+          <option value="fr">Français</option>
+          <option value="en">English</option>
+          <option value="ar">العربية</option>
+        </select>
+        <button class="btn btn-ghost" id="btn-generate" data-i18n="admin_generate">Générer titres & descriptions</button>
+        <button class="btn btn-ghost" id="btn-reset">↺</button>
+      </div>
+      <div class="admin-items" id="items"></div>
+    </div>
+  </div>
+
+  <div class="login-box" id="login-box">
+    <img src="assets/logo.svg" alt="Qamra">
+    <h1 data-i18n="admin_login_title">Espace créatrice</h1>
+    <span class="hint" data-i18n="admin_login_sub">Entrez le mot de passe pour gérer la collection</span>
+    <input type="password" id="password" placeholder="••••••••">
+    <button class="btn btn-primary" id="btn-login" style="width:100%" data-i18n="admin_enter">Entrer</button>
+    <div class="hint" style="margin-top:14px">✦ Sundus</div>
+  </div>
+
+  <div class="status" id="status"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

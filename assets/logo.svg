@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD6E8"/>
+      <stop offset="45%" stop-color="#E8D5FF"/>
+      <stop offset="100%" stop-color="#D6E8FF"/>
+    </linearGradient>
+    <linearGradient id="moon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDF5"/>
+      <stop offset="100%" stop-color="#FFE3F0"/>
+    </linearGradient>
+    <linearGradient id="silk" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F9A8D4"/>
+      <stop offset="50%" stop-color="#C4B5FD"/>
+      <stop offset="100%" stop-color="#BFDBFE"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD9EC" stop-opacity="0.9"/>
+      <stop offset="70%" stop-color="#EADBFF" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#EADBFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="120" fill="url(#sky)"/>
+  <circle cx="256" cy="256" r="230" fill="url(#glow)"/>
+  <g transform="translate(256 196)">
+    <circle cx="0" cy="0" r="106" fill="url(#moon)"/>
+    <circle cx="42" cy="-18" r="99" fill="url(#sky)"/>
+  </g>
+  <path d="M96 430 C 180 400, 220 452, 300 428 C 370 407, 420 430, 436 448 L 436 462 C 420 450, 370 434, 300 452 C 220 472, 180 424, 96 452 Z" fill="url(#silk)" opacity="0.9"/>
+  <path d="M120 452 C 190 430, 240 462, 300 448 C 350 437, 400 452, 420 464 L 420 476 C 400 466, 350 458, 300 468 C 240 478, 190 452, 120 472 Z" fill="url(#silk)" opacity="0.6"/>
+  <circle cx="178" cy="116" r="13" fill="#FFD9EC" opacity="0.85"/>
+  <circle cx="392" cy="140" r="9" fill="#FFE8F2" opacity="0.9"/>
+  <circle cx="368" cy="330" r="11" fill="#E6DCFF" opacity="0.8"/>
+  <g font-family="Georgia, 'Times New Roman', serif" text-anchor="middle">
+    <text x="256" y="424" font-size="58" letter-spacing="12" fill="#C98BB9" font-weight="bold">SUNDUS</text>
+    <text x="256" y="462" font-size="24" letter-spacing="8" fill="#B49AD8" style="font-style: italic">sundus.fashion</text>
+  </g>
+</svg>
