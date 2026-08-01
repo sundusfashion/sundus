@@ -17,7 +17,7 @@ window.SUNDUS_CONFIG = {
 
   cloud: {
     enabled: false,
-    owner: "",
+    owner: "sundusfashion",
     repo: "sundus",
     token: "",
     branch: "main"
