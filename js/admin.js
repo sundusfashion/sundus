@@ -137,11 +137,12 @@
 
   /* ================= AI CHAIN: Groq → Gemini → offline ================= */
   async function callGroq(prompt) {
-    if (!C.ai.groqKey) return null;
+    const key = getKey("groq");
+    if (!key) return null;
     try {
       const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${C.ai.groqKey}` },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
         body: JSON.stringify({
           model: C.ai.groqModel,
           messages: [
@@ -160,9 +161,10 @@
   }
 
   async function callGemini(prompt) {
-    if (!C.ai.geminiKey) return null;
+    const key = getKey("gemini");
+    if (!key) return null;
     try {
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${C.ai.geminiModel}:generateContent?key=${C.ai.geminiKey}`, {
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${C.ai.geminiModel}:generateContent?key=${key}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
@@ -364,12 +366,28 @@ Be elegant, modest-fashion aware, pastel-inspired. Never mention the file name.`
     try { return localStorage.getItem("sundus_cloud_token") || C.cloud.token; } catch (e) { return C.cloud.token; }
   }
 
+  function getKey(which) {
+    const store = which === "groq" ? "sundus_groq_key" : "sundus_gemini_key";
+    const cfg = which === "groq" ? C.ai.groqKey : C.ai.geminiKey;
+    try { return localStorage.getItem(store) || cfg; } catch (e) { return cfg; }
+  }
+
   async function saveToken() {
     const token = $("token-input").value.trim();
-    if (!token) { toast(t("admin_token_bad")); return; }
-    try { localStorage.setItem("sundus_cloud_token", token); } catch (e) {}
+    const groq = $("groq-input").value.trim();
+    const gemini = $("gemini-input").value.trim();
+    try {
+      if (token) localStorage.setItem("sundus_cloud_token", token);
+      if (groq) localStorage.setItem("sundus_groq_key", groq);
+      if (gemini) localStorage.setItem("sundus_gemini_key", gemini);
+    } catch (e) {}
     toast(t("admin_token_ok"));
-    $("token-input").value = "";
+    $("token-input").value = ""; $("groq-input").value = ""; $("gemini-input").value = "";
+    const badge = document.querySelector(".ai-badge span");
+    if (badge) {
+      const parts = [getKey("groq") ? "Groq" : null, getKey("gemini") ? "Gemini" : null, t("ai_offline")].filter(Boolean);
+      badge.textContent = "✦ IA: " + parts.join(" → ") + " ☁️";
+    }
   }
 
   async function cloudPublish(products) {

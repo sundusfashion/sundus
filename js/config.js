@@ -2,9 +2,9 @@ window.SUNDUS_CONFIG = {
   brand: "Sundus",
   tagline: { fr: "La soie fine du paradis", en: "The fine silk of paradise", ar: "حرير الجنة" },
   email: "hello.qamra@gmail.com",
-  instagram: "https://www.instagram.com/sundus.fashion",
-  tiktok: "https://www.tiktok.com/@sundus.fashion",
-  pinterest: "https://www.pinterest.com/sundusfashion",
+  instagram: "https://www.instagram.com/sundus.fashionn",
+  tiktok: "https://www.tiktok.com/@sundus.fashionn",
+  pinterest: "https://www.pinterest.com/sundusfashionn",
   currency: "€",
   adminPassword: "sundus2026",
 
