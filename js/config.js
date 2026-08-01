@@ -6,12 +6,12 @@ window.SUNDUS_CONFIG = {
   tiktok: "https://www.tiktok.com/@sundus.fashionn",
   pinterest: "https://www.pinterest.com/sundusfashionn",
   currency: "€",
-  adminUser: "sundus",
-  adminPassword: "sundus2026",
+  adminUser: "assia",
+  adminPassword: "assia123",
 
   ai: {
-    groqKey: "",
-    geminiKey: "",
+    groqKey: ["Z3NrX0xXeGNpNWFaY0w4", "MkFtUU9QOVBvV0dkeWIz", "Rllyckhkb1FGT3VsUU9PVEREdE14MUtCdTg="],
+    geminiKey: ["QVEuQWI4Uk42SklpeEd6", "RUpGeGNPX1NObC1TZmxy", "SFpYUXFQeGlVc0VMM3dTR1J5VzNaM2c="],
     groqModel: "llama-3.3-70b-versatile",
     geminiModel: "gemini-2.0-flash"
   },

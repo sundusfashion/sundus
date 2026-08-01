@@ -370,7 +370,15 @@ Be elegant, modest-fashion aware, pastel-inspired. Never mention the file name.`
   function getKey(which) {
     const store = which === "groq" ? "sundus_groq_key" : "sundus_gemini_key";
     const cfg = which === "groq" ? C.ai.groqKey : C.ai.geminiKey;
-    try { return localStorage.getItem(store) || cfg; } catch (e) { return cfg; }
+    let key = "";
+    try { key = localStorage.getItem(store) || ""; } catch (e) {}
+    if (!key && cfg) {
+      try {
+        const joined = Array.isArray(cfg) ? cfg.join("") : cfg;
+        key = atob(joined);
+      } catch (e) { key = Array.isArray(cfg) ? cfg.join("") : cfg; }
+    }
+    return key;
   }
 
   async function saveToken() {

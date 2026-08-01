@@ -106,17 +106,18 @@
   }
 
   function mailtoHref(subject, ref) {
-    return `mailto:${C.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Bonjour ${C.brand},\n\nJe suis intéressée par cette pièce (réf: ${ref}).\n\nMerci !`)}`;
+    const body = `Bonjour ${C.brand},\n\nJe suis intéressée par cette pièce (réf: ${ref}).\n\nMerci !`;
+    return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(C.email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
   function renderSocials() {
     const socials = [
-      ["Instagram", "https://www.instagram.com/", "instagram"],
-      ["TikTok", "https://www.tiktok.com/", "tiktok"],
-      ["Pinterest", "https://www.pinterest.com/", "pinterest"]
+      ["Instagram", C.instagram, "instagram"],
+      ["TikTok", C.tiktok, "tiktok"],
+      ["Pinterest", C.pinterest, "pinterest"]
     ];
-    document.getElementById("socials").innerHTML = socials.map(([name, base, key]) =>
-      `<a class="social-btn" href="${base}" target="_blank" rel="noopener" aria-label="${name}" title="${name}">
+    document.getElementById("socials").innerHTML = socials.map(([name, url, key]) =>
+      `<a class="social-btn" href="${url}" target="_blank" rel="noopener" aria-label="${name}" title="${name}">
         <svg viewBox="0 0 24 24">${icons[key]}</svg>
       </a>`).join("");
   }
