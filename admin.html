@@ -117,6 +117,14 @@
         <button class="btn btn-ghost" id="btn-generate" data-i18n="admin_generate">Générer titres & descriptions</button>
         <button class="btn btn-ghost" id="btn-reset">↺</button>
       </div>
+      <details style="margin-top:14px">
+        <summary style="cursor:pointer;color:var(--ink-soft);font-size:0.85rem">🔑 <span data-i18n="admin_token_title">Clé de publication (1 seule fois)</span></summary>
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+          <input type="password" id="token-input" placeholder="github_pat_..." style="flex:1;min-width:220px;padding:11px 14px;border-radius:10px;border:1.4px solid rgba(92,75,99,0.2);font-family:inherit;outline:none">
+          <button class="btn btn-ghost" id="btn-token" style="padding:10px 20px;font-size:0.85rem" data-i18n="admin_token_save">Guardar</button>
+        </div>
+        <div class="hint" data-i18n="admin_token_hint">Se guarda solo en este navegador. Nunca se publica.</div>
+      </details>
       <div class="admin-items" id="items"></div>
     </div>
   </div>

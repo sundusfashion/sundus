@@ -110,14 +110,14 @@
   };
 
   const DESC_TEMPLATES = {
-    fr: ["Une pièce délicate dans une teinte {color}, pensée pour la douceur, l'élégance et la modestie au quotidien.",
-      "Création Sundus en {color}: une coupe féminine qui accompagne chaque moment avec grâce et pudeur.",
+    fr: ["Une pièce délicate dans une teinte {color}, pensée pour la douceur et l'élégance féminine au quotidien.",
+      "Création Sundus en {color}: une coupe féminine qui accompagne chaque moment avec grâce.",
       "La soie fine du paradis: cette pièce {color} révèle une féminité délicate, moderne et raffinée."],
-    en: ["A delicate piece in a {color} shade, designed for everyday softness, elegance and modesty.",
-      "A Sundus creation in {color}: a feminine cut that accompanies every moment with grace and modesty.",
+    en: ["A delicate piece in a {color} shade, designed for everyday softness and feminine elegance.",
+      "A Sundus creation in {color}: a feminine cut that accompanies every moment with grace.",
       "The fine silk of paradise: this {color} piece reveals delicate, modern, refined femininity."],
-    ar: ["قطعة رقيقة بلون {color}، صُممت للنعومة والأناقة والاحتشام في كل يوم.",
-      "إبداع سندس بلون {color}: قصّة أنثوية ترافق كل لحظة برشاقة واحتشام.",
+    ar: ["قطعة رقيقة بلون {color}، صُممت للنعومة والأناقة الأنثوية في كل يوم.",
+      "إبداع سُنْدُس بلون {color}: قصّة أنثوية ترافق كل لحظة برشاقة.",
       "حرير الجنة الناعم: هذه القطعة بلون {color} تُظهر أنوثة رقيقة وعصرية وأنيقة."]
   };
 
@@ -181,8 +181,8 @@
     const itemsStr = (item.colors || []).length
       ? `The dominant color(s) of the photo: ${item.colors.map(([r, g, b]) => `rgb(${r},${g},${b})`).join(", ")}.`
       : "";
-    const prompt = `You are a fashion copywriter for Sundus, a hijab/modest fashion brand (feminine, pastel, delicate, modern, "the fine silk of paradise").
-A designer uploaded a new garment (photo: hijab, abaya, dress or accessory).
+    const prompt = `You are a fashion copywriter for Sundus, a women's fashion brand (feminine, pastel, delicate, modern, "the fine silk of paradise"). It offers dresses, tops, skirts, hijabs, abayas and accessories for all women.
+A designer uploaded a new garment (dress, top, skirt, hijab, abaya or accessory).
 ${itemsStr}
 Generate for EACH language (${langs.join(", ")}) exactly 3 options. Each option = title (max 5 words, poetic, feminine) + description (1-2 sentences).
 Return ONLY strict JSON: {"fr":[{"title":"...","desc":"..."}],"en":[...],"ar":[...]} — always include ALL 3 languages (fr, en, ar) in the response, even if you only refine one.
@@ -347,10 +347,11 @@ Be elegant, modest-fashion aware, pastel-inspired. Never mention the file name.`
   }
 
   async function githubPut(path, base64) {
+    const token = getToken();
     const res = await fetch(`https://api.github.com/repos/${C.cloud.owner}/${C.cloud.repo}/contents/${path}`, {
       method: "PUT",
       headers: {
-        "Authorization": `Bearer ${C.cloud.token}`,
+        "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json",
         "Accept": "application/vnd.github+json"
       },
@@ -359,8 +360,20 @@ Be elegant, modest-fashion aware, pastel-inspired. Never mention the file name.`
     return res.ok || res.status === 409;
   }
 
+  function getToken() {
+    try { return localStorage.getItem("sundus_cloud_token") || C.cloud.token; } catch (e) { return C.cloud.token; }
+  }
+
+  async function saveToken() {
+    const token = $("token-input").value.trim();
+    if (!token) { toast(t("admin_token_bad")); return; }
+    try { localStorage.setItem("sundus_cloud_token", token); } catch (e) {}
+    toast(t("admin_token_ok"));
+    $("token-input").value = "";
+  }
+
   async function cloudPublish(products) {
-    if (!C.cloud.enabled || !C.cloud.token || !C.cloud.owner) return false;
+    if (!C.cloud.enabled || !getToken() || !C.cloud.owner) return false;
     try {
       for (const [id, item] of items) {
         const base64 = item.get("data").split(",")[1];
@@ -466,6 +479,8 @@ Be elegant, modest-fashion aware, pastel-inspired. Never mention the file name.`
     $("btn-generate").addEventListener("click", generateAll);
     $("btn-publish").addEventListener("click", publish);
     $("btn-reset").addEventListener("click", () => { items.clear(); renderItems(); });
+    $("btn-token").addEventListener("click", saveToken);
+    $("token-input").addEventListener("keydown", (e) => { if (e.key === "Enter") saveToken(); });
 
     const badge = document.querySelector(".ai-badge span");
     if (badge) {

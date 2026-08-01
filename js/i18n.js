@@ -10,7 +10,7 @@
       hero_badge: "Nouvelle collection 2026",
       hero_title1: "La soie fine du",
       hero_title2: "paradis, cousue pour vous",
-      hero_sub: "Sundus, la soie fine du paradis, tisse des pièces délicates et féminines pour la femme moderne. Douceur, élégance et modestie.",
+      hero_sub: "Sundus, la soie fine du paradis, crée des pièces féminines et délicates en couleurs pastel. Une élégance douce pour chaque femme qui veut briller.",
       hero_cta: "Découvrir la collection",
       hero_cta2: "Nous écrire",
       stats_pieces: "pièces uniques",
@@ -22,10 +22,12 @@
       filter_hijabs: "Hijabs",
       filter_abayas: "Abayas",
       filter_robes: "Robes",
+      filter_hauts: "Hauts",
+      filter_jupes: "Jupes",
       filter_accessoires: "Accessoires",
       about_title: "L'histoire de Sundus",
-      about_p1: "Sundus signifie « soie fine du paradis » en arabe. C'est l'histoire d'une jeune créatrice qui tisse douceur, élégance et modernité pour la femme d'aujourd'hui.",
-      about_p2: "Chaque création est pensée pour sublimer celle qui la porte, avec des matières nobles, des couleurs pastel et le respect de la modestie.",
+      about_p1: "Sundus signifie « soie fine du paradis » en arabe. C'est l'histoire d'une jeune créatrice qui transforme la douceur de la soie en pièces féminines, élégantes et lumineuses.",
+      about_p2: "Chaque création est pensée pour révéler la beauté de celle qui la porte : des matières nobles, des couleurs pastel et une féminité qui s'exprime librement.",
       about_cta: "Contacter la créatrice",
       cta_title: "Prête à briller ?",
       cta_sub: "Écrivez-nous pour commander une pièce ou une création sur mesure.",
@@ -64,7 +66,12 @@
       share: "Partager",
       load_more: "Voir plus de pièces",
       soon: "Bientôt disponible",
-      price_placeholder: "Prix — ex: 89"
+      price_placeholder: "Prix — ex: 89",
+      admin_token_title: "Clé de publication (une seule fois)",
+      admin_token_save: "Enregistrer",
+      admin_token_hint: "Stockée uniquement dans ce navigateur. Jamais publiée.",
+      admin_token_ok: "Clé enregistrée ☁️",
+      admin_token_bad: "Clé invalide"
     },
     en: {
       nav_shop: "Collection",
@@ -74,7 +81,7 @@
       hero_badge: "New 2026 collection",
       hero_title1: "The fine silk of",
       hero_title2: "paradise, tailored for you",
-      hero_sub: "Sundus, the fine silk of paradise, weaves delicate and feminine pieces for the modern woman. Softness, elegance and modesty.",
+      hero_sub: "Sundus, the fine silk of paradise, creates feminine and delicate pieces in pastel colours. A soft elegance for every woman who wants to shine.",
       hero_cta: "Discover the collection",
       hero_cta2: "Write to us",
       stats_pieces: "unique pieces",
@@ -86,10 +93,12 @@
       filter_hijabs: "Hijabs",
       filter_abayas: "Abayas",
       filter_robes: "Dresses",
+      filter_hauts: "Tops",
+      filter_jupes: "Skirts",
       filter_accessoires: "Accessories",
       about_title: "The Sundus story",
-      about_p1: "Sundus means \"fine silk of paradise\" in Arabic. It is the story of a young designer who weaves softness, elegance and modernity for today's woman.",
-      about_p2: "Every creation is designed to enhance the woman who wears it, with noble materials, pastel colours and respect for modesty.",
+      about_p1: "Sundus means \"fine silk of paradise\" in Arabic. It is the story of a young designer who turns the softness of silk into feminine, elegant, luminous pieces.",
+      about_p2: "Every creation is designed to reveal the beauty of the woman who wears it: noble materials, pastel colours and femininity that expresses itself freely.",
       about_cta: "Contact the designer",
       cta_title: "Ready to shine?",
       cta_sub: "Write to us to order a piece or a custom creation.",
@@ -128,7 +137,12 @@
       share: "Share",
       load_more: "See more pieces",
       soon: "Coming soon",
-      price_placeholder: "Price — e.g. 89"
+      price_placeholder: "Price — e.g. 89",
+      admin_token_title: "Publishing key (once)",
+      admin_token_save: "Save",
+      admin_token_hint: "Stored only in this browser. Never published.",
+      admin_token_ok: "Key saved ☁️",
+      admin_token_bad: "Invalid key"
     },
     ar: {
       nav_shop: "التشكيلة",
@@ -138,28 +152,30 @@
       hero_badge: "تشكيلة 2026 الجديدة",
       hero_title1: "حرير",
       hero_title2: "الجنة، مخيط لأجلكِ",
-      hero_sub: "سندس، حرير الجنة الناعم، تنسج قطعاً رقيقة وأنثوية للمرأة العصرية. نعومة وأناقة واحتشام.",
+      hero_sub: "سُنْدُس، حرير الجنة الناعم، تصنع قطعاً أنثوية رقيقة بألوان الباستيل. أناقة ناعمة لكل امرأة تريد أن تتألق.",
       hero_cta: "اكتشفي التشكيلة",
       hero_cta2: "راسلينا",
       stats_pieces: "قطعة فريدة",
       stats_love: "عميلة سعيدة",
       stats_craft: "صنع يدوي بحب",
       collection_title: "التشكيلة",
-      collection_sub: "كل قطعة سندس تُصمَّم وتُخاط بحب وعناية.",
+      collection_sub: "كل قطعة سُنْدُس تُصمَّم وتُخاط بحب وعناية.",
       filter_all: "الكل",
       filter_hijabs: "حجابات",
       filter_abayas: "عبايات",
       filter_robes: "فساتين",
+      filter_hauts: "قِطع علوية",
+      filter_jupes: "تنانير",
       filter_accessoires: "إكسسوارات",
-      about_title: "حكاية سندس",
-      about_p1: "سندس تعني «حرير الجنة الناعم» بالعربية. إنها حكاية مصممة شابة تنسج النعومة والأناقة والعصرية للمرأة اليوم.",
-      about_p2: "كل إبداع صُمم ليُبرز جمال من ترتديه، بأقمشة نبيلة وألوان باستيل واحترام للاحتشام.",
+      about_title: "حكاية سُنْدُس",
+      about_p1: "سُنْدُس تعني «حرير الجنة الناعم» بالعربية. إنها حكاية مصممة شابة تحوّل نعومة الحرير إلى قطع أنثوية، أنيقة ومضيئة.",
+      about_p2: "كل إبداع صُمم ليكشف جمال من ترتديه: أقمشة نبيلة، ألوان باستيل، وأنوثة تعبّر عن نفسها بحرية.",
       about_cta: "راسلي المصممة",
       cta_title: "جاهزة للتألق؟",
       cta_sub: "راسلينا لطلب قطعة أو تصميم حسب الطلب.",
       cta_btn: "إرسال بريد",
       contact_title: "اتصال",
-      contact_sub: "تابعي قمـرة وراسلينا، نرد بكل الحب.",
+      contact_sub: "تابعي سُنْدُس وراسلينا، نرد بكل الحب.",
       footer_rights: "جميع الحقوق محفوظة.",
       footer_made: "صنع بحب",
       lightbox_close: "إغلاق",
@@ -192,20 +208,55 @@
       share: "مشاركة",
       load_more: "شاهدي المزيد",
       soon: "قريباً",
-      price_placeholder: "السعر — مثل: 89"
+      price_placeholder: "السعر — مثل: 89",
+      admin_token_title: "مفتاح النشر (مرة واحدة فقط)",
+      admin_token_save: "حفظ",
+      admin_token_hint: "يُحفظ في هذا المتصفح فقط. لا يُنشر أبداً.",
+      admin_token_ok: "تم حفظ المفتاح ☁️",
+      admin_token_bad: "مفتاح غير صالح"
     }
   };
 
   const rtl = { ar: true };
 
+  const BRAND_NAME = { fr: "SUNDUS", en: "SUNDUS", ar: "سُنْدُس" };
+
+  function brandName(lang) {
+    return BRAND_NAME[lang] || "SUNDUS";
+  }
+
   function detect() {
-    const saved = localStorage.getItem("qamra_locale");
+    const saved = localStorage.getItem("sundus_locale");
     if (saved && SUPPORTED.includes(saved)) return saved;
     const nav = (navigator.language || "en").toLowerCase().split("-")[0];
     return SUPPORTED.includes(nav) ? nav : "en";
   }
 
   let current = detect();
+
+  function detectTheme() {
+    const saved = localStorage.getItem("sundus_theme");
+    if (saved === "dark" || saved === "light") return saved;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+
+  let theme = detectTheme();
+
+  function applyTheme() {
+    document.documentElement.setAttribute("data-theme", theme);
+    document.querySelectorAll("[data-theme-btn]").forEach((btn) => {
+      const isDark = theme === "dark";
+      btn.textContent = isDark ? "☀️" : "🌙";
+      btn.title = isDark ? "Light" : "Dark";
+    });
+    document.dispatchEvent(new CustomEvent("sundus:theme", { detail: theme }));
+  }
+
+  function setTheme(mode) {
+    theme = mode;
+    try { localStorage.setItem("sundus_theme", mode); } catch (e) {}
+    applyTheme();
+  }
 
   function apply() {
     document.documentElement.lang = current;
@@ -218,16 +269,19 @@
       const key = el.dataset.i18nPh;
       if (STRINGS[current][key]) el.placeholder = STRINGS[current][key];
     });
+    document.querySelectorAll("[data-brand]").forEach((el) => {
+      el.textContent = brandName(current);
+    });
     document.querySelectorAll("[data-lang-btn]").forEach((btn) => {
       btn.classList.toggle("active", btn.dataset.langBtn === current);
     });
-    document.dispatchEvent(new CustomEvent("qamra:lang", { detail: current }));
+    document.dispatchEvent(new CustomEvent("sundus:lang", { detail: current }));
   }
 
   function set(lang) {
     if (!SUPPORTED.includes(lang)) return;
     current = lang;
-    try { localStorage.setItem("qamra_locale", lang); } catch (e) {}
+    try { localStorage.setItem("sundus_locale", lang); } catch (e) {}
     apply();
   }
 
@@ -235,12 +289,16 @@
     return STRINGS[current][key] || key;
   }
 
-  window.SundusI18n = { t, set, get: () => current, apply, detect, locales: SUPPORTED };
+  window.SundusI18n = { t, set, get: () => current, apply, detect, locales: SUPPORTED, theme, setTheme, getTheme: () => theme, brandName };
 
   document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("[data-lang-btn]").forEach((btn) => {
       btn.addEventListener("click", () => set(btn.dataset.langBtn));
     });
+    document.querySelectorAll("[data-theme-btn]").forEach((btn) => {
+      btn.addEventListener("click", () => setTheme(theme === "dark" ? "light" : "dark"));
+    });
+    applyTheme();
     apply();
   });
 })();

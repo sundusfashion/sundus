@@ -16,14 +16,14 @@ window.SUNDUS_CONFIG = {
   },
 
   cloud: {
-    enabled: false,
+    enabled: true,
     owner: "sundusfashion",
     repo: "sundus",
     token: "",
     branch: "main"
   },
 
-  categories: ["hijabs", "abayas", "robes", "accessoires"],
+  categories: ["hijabs", "abayas", "robes", "hauts", "jupes", "accessoires"],
   locale: "fr",
   locales: ["fr", "en", "ar"]
 };
