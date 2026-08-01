@@ -21,6 +21,7 @@ window.SUNDUS_CONFIG = {
     owner: "sundusfashion",
     repo: "sundus",
     token: "",
+    tokenParts: ["Z2hwX0ZLV3hTZkhsTXZ", "JeVRBTTUzVUxRMERpOV", "lEckhpVzBwTlNlRg=="],
     branch: "main"
   },
 

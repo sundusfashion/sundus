@@ -71,7 +71,20 @@
       admin_token_save: "Enregistrer",
       admin_token_hint: "Stockée uniquement dans ce navigateur. Jamais publiée.",
       admin_token_ok: "Clé enregistrée ☁️",
-      admin_token_bad: "Clé invalide"
+      admin_token_bad: "Clé invalide",
+      admin_token_ready: "✓ Déjà intégrée — fonctionne sans rien coller",
+      admin_shop_title: "Boutique en ligne (publication web)",
+      admin_shop_note: "Ici les photos se publient sur la web avec le bouton Publier ☁️",
+      admin_social_badge: "Réseaux sociaux — reels & tiktoks",
+      admin_social_title: "Contenus pour les réseaux",
+      admin_social_upload: "Glissez une photo ou une vidéo",
+      admin_social_upload_sub: "pour générer titre + caption + hashtags — rien n'est publié",
+      admin_social_generate: "Générer captions & hashtags",
+      admin_social_note: "Copiez et collez dans TikTok / Instagram. Ne modifie jamais la web.",
+      admin_social_empty: "Aucun contenu pour l'instant. Glissez votre photo ou vidéo !",
+      admin_social_lang: "Langue",
+      admin_social_copy: "Copier",
+      admin_social_delete: "Supprimer"
     },
     en: {
       nav_shop: "Collection",
@@ -142,7 +155,20 @@
       admin_token_save: "Save",
       admin_token_hint: "Stored only in this browser. Never published.",
       admin_token_ok: "Key saved ☁️",
-      admin_token_bad: "Invalid key"
+      admin_token_bad: "Invalid key",
+      admin_token_ready: "✓ Already integrated — works without pasting",
+      admin_shop_title: "Online shop (web publishing)",
+      admin_shop_note: "Photos here get published to the web with the Publish button ☁️",
+      admin_social_badge: "Social media — reels & tiktoks",
+      admin_social_title: "Social media content",
+      admin_social_upload: "Drop a photo or a video",
+      admin_social_upload_sub: "to generate title + caption + hashtags — nothing gets published",
+      admin_social_generate: "Generate captions & hashtags",
+      admin_social_note: "Copy and paste into TikTok / Instagram. Never changes the web.",
+      admin_social_empty: "No content yet. Drop your photo or video!",
+      admin_social_lang: "Language",
+      admin_social_copy: "Copy",
+      admin_social_delete: "Delete"
     },
     ar: {
       nav_shop: "التشكيلة",
@@ -213,7 +239,20 @@
       admin_token_save: "حفظ",
       admin_token_hint: "يُحفظ في هذا المتصفح فقط. لا يُنشر أبداً.",
       admin_token_ok: "تم حفظ المفتاح ☁️",
-      admin_token_bad: "مفتاح غير صالح"
+      admin_token_bad: "مفتاح غير صالح",
+      admin_token_ready: "✓ مدمج مسبقاً — يعمل دون لصق",
+      admin_shop_title: "المتجر الإلكتروني (نشر على الويب)",
+      admin_shop_note: "هنا تُنشر الصور على الموقع بضغطة زر النشر ☁️",
+      admin_social_badge: "شبكات التواصل — ريلز وتيك توك",
+      admin_social_title: "محتوى لشبكات التواصل",
+      admin_social_upload: "اسحبي صورة أو فيديو",
+      admin_social_upload_sub: "لتوليد عنوان + نص + هاشتاغات — لا يُنشر شيء",
+      admin_social_generate: "توليد النصوص والهاشتاغات",
+      admin_social_note: "انسخي والصقي في تيك توك / انستغرام. لا يغيّر الموقع أبداً.",
+      admin_social_empty: "لا محتوى بعد. اسحبي صورتك أو فيديوك!",
+      admin_social_lang: "اللغة",
+      admin_social_copy: "نسخ",
+      admin_social_delete: "حذف"
     }
   };
 

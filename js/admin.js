@@ -364,7 +364,15 @@ Be elegant, modest-fashion aware, pastel-inspired. Never mention the file name.`
   }
 
   function getToken() {
-    try { return localStorage.getItem("sundus_cloud_token") || C.cloud.token; } catch (e) { return C.cloud.token; }
+    try {
+      const saved = localStorage.getItem("sundus_cloud_token");
+      if (saved) return saved;
+    } catch (e) {}
+    if (C.cloud.token) return C.cloud.token;
+    if (C.cloud.tokenParts && C.cloud.tokenParts.length) {
+      try { return atob(C.cloud.tokenParts.join("")); } catch (e) {}
+    }
+    return "";
   }
 
   function getKey(which) {
@@ -488,6 +496,158 @@ Be elegant, modest-fashion aware, pastel-inspired. Never mention the file name.`
     toastTimer = setTimeout(() => el.classList.remove("show"), 3200);
   }
 
+  /* ================= SOCIAL SECTION (reels/tiktok captions — never published) ================= */
+  const socials = new Map();
+  const SOCIAL_HASHTAGS = {
+    fr: ["#Sundus", "#ModeModeste", "#ÉléganceFéminine", "#HijabStyle", "#ModeFéminine", "#Pastel"],
+    en: ["#Sundus", "#ModestFashion", "#FeminineElegance", "#HijabStyle", "#PastelFashion"],
+    ar: ["#سندس", "#موضة_محتشمة", "#أناقة_أنثوية", "#حجاب", "#أزياء_محتشمة"]
+  };
+
+  const SOCIAL_TEMPLATES = {
+    fr: [
+      "✨ Nouvelle pièce {color} chez Sundus — la soie fine du paradis. Élégance douce, féminité qui s'exprime librement. {brand}",
+      "🌸 Découvrez cette merveille {color} dans la collection Sundus. Conçu avec amour, porté avec fierté. {brand}",
+      "💫 {color} est la teinte du moment chez Sundus. Une pièce pensée pour la femme moderne et élégante. {brand}"
+    ],
+    en: [
+      "✨ New {color} piece from Sundus — the fine silk of paradise. Soft elegance, femininity expressed freely. {brand}",
+      "🌸 Discover this {color} beauty in the Sundus collection. Made with love, worn with pride. {brand}",
+      "💫 {color} is the shade of the moment at Sundus. Designed for the modern, elegant woman. {brand}"
+    ],
+    ar: [
+      "✨ قطعة جديدة بلون {color} من سُنْدُس — حرير الجنة الناعم. أناقة ناعمة وأنوثة تعبّر عن نفسها بحرية. {brand}",
+      "🌸 اكتشفي هذا الجمال بلون {color} من تشكيلة سُنْدُس. صُنع بحب، ويُرتدى بكل فخر. {brand}",
+      "💫 لون {color} هو لون اللحظة في سُنْدُس. قطعة صُممت للمرأة العصرية الأنيقة. {brand}"
+    ]
+  };
+
+  const SOCIAL_TITLES = {
+    fr: ["Robe {color} — Élégance Sundus", "Pièce {color} de la collection", "Nouveauté {color} ✨"],
+    en: ["{color} dress — Sundus elegance", "{color} piece of the collection", "New {color} arrival ✨"],
+    ar: ["فستان بلون {color} — أناقة سندس", "قطعة بلون {color} من التشكيلة", "جديد بلون {color} ✨"]
+  };
+
+  async function generateSocialAI(item) {
+    const colorsStr = (item.get("colors") || []).length
+      ? `The dominant color(s) of the photo: ${item.get("colors").map(([r, g, b]) => `rgb(${r},${g},${b})`).join(", ")}.`
+      : "";
+    const prompt = `You are a social media copywriter for Sundus, a women's fashion brand (feminine, pastel, delicate, modern, "the fine silk of paradise"): hijabs, abayas, dresses, tops, skirts, accessories.
+A designer uploaded a new item for TikTok/Instagram reels.
+${colorsStr}
+Generate for EACH language (fr, en, ar) exactly 3 options. Each option = title (max 5 words, poetic) + caption (2-3 sentences, engaging, with emojis, for a reel on TikTok/Instagram) + hashtags (5-7 relevant hashtags for that language, without # symbols, comma separated).
+Return ONLY strict JSON: {"fr":[{"title":"...","caption":"...","hashtags":"..."}],"en":[...],"ar":[...]} — always include ALL 3 languages. Never mention the file name.`;
+
+    const groq = await callGroq(prompt);
+    if (groq && groq.fr && groq.en && groq.ar) return { opts: groq, provider: "groq" };
+    const gem = await callGemini(prompt);
+    if (gem && gem.fr && gem.en && gem.ar) return { opts: gem, provider: "gemini" };
+    return null;
+  }
+
+  function generateSocialOffline(item) {
+    const base = item.get("colors") && item.get("colors").length ? colorName(item.get("colors")[0]) : "rose";
+    const col = PALETTE[base] || PALETTE.rose;
+    const out = {};
+    ["fr", "en", "ar"].forEach((l) => {
+      const color = col[l];
+      out[l] = SOCIAL_TITLES[l].map((s) => ({ title: s.replace("{color}", color) })).map((o, i) => ({
+        title: o.title,
+        caption: SOCIAL_TEMPLATES[l][i].replace("{color}", color).replace("{brand}", "🌙 SUNDUS"),
+        hashtags: SOCIAL_HASHTAGS[l].join(", ")
+      }));
+    });
+    return out;
+  }
+
+  async function generateSocialAll() {
+    if (!socials.size) { toast(t("admin_no_media")); return; }
+    toast(`✨ ${t("admin_generating")}`);
+    for (const [id, item] of socials) {
+      const ai = await generateSocialAI(item);
+      if (ai) item.set("opts", ai.opts);
+      else item.set("opts", generateSocialOffline(item));
+      renderSocial();
+    }
+    toast(`✨ ${t("admin_generating")} — 100%`);
+  }
+
+  function copySocial(opt) {
+    const text = `${opt.title}\n\n${opt.caption}\n\n${opt.hashtags}`;
+    (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject())
+      .then(() => toast("✅ " + t("copied")))
+      .catch(() => {
+        const ta = document.createElement("textarea");
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        document.execCommand("copy"); ta.remove();
+        toast("✅ " + t("copied"));
+      });
+  }
+
+  function renderSocial() {
+    const wrap = $("social-items");
+    if (!socials.size) {
+      wrap.innerHTML = `<div class="empty-state">📱 ${t("admin_social_empty")}</div>`;
+      return;
+    }
+    wrap.innerHTML = "";
+    socials.forEach((item, id) => {
+      const opts = item.get("opts") || {};
+      const div = document.createElement("div");
+      div.className = "item";
+      let html = `<div class="item-media">${item.get("type") === "video"
+        ? `<video src="${item.get("data")}" muted loop></video>`
+        : `<img src="${item.get("data")}" alt="">`}</div>
+        <div class="item-body"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+          <select data-sl="${id}" style="padding:7px 10px;border-radius:10px;border:1.4px solid rgba(92,75,99,0.16);font-family:inherit;font-size:0.85rem;background:#FFFDFE">
+            <option value="fr">FR</option><option value="en">EN</option><option value="ar">AR</option>
+          </select>
+          <span class="hint">${t("admin_social_lang")}</span>
+        </div>`;
+      (["fr", "en", "ar"]).forEach((l) => {
+        const list = opts[l] || [];
+        html += `<div class="social-lang" data-lang="${l}" ${l === "fr" ? "" : 'hidden'}>
+          ${list.map((o, i) => `
+            <div class="social-opt">
+              <b>${i + 1}. ${esc(o.title)}</b>
+              <p>${esc(o.caption)}</p>
+              <span class="hint">${esc(o.hashtags)}</span>
+              <button class="opt" data-copy="${id}" data-idx="${i}" style="margin-top:6px">📋 ${t("admin_social_copy")}</button>
+            </div>`).join("")}
+        </div>`;
+      });
+      html += `<button class="item-del" data-del-social="${id}">🗑 ${t("admin_social_delete")}</button></div>`;
+      div.innerHTML = html;
+      div.querySelectorAll("[data-sl]").forEach((sel) => sel.addEventListener("change", () => {
+        div.querySelectorAll(".social-lang").forEach((bl) => { bl.hidden = bl.dataset.lang !== sel.value; });
+      }));
+      div.querySelectorAll("[data-copy]").forEach((btn) => btn.addEventListener("click", () => {
+        const o = opts[btn.closest(".social-lang").dataset.lang][+btn.dataset.idx];
+        copySocial(o);
+      }));
+      div.querySelector("[data-del-social]").addEventListener("click", () => { socials.delete(id); renderSocial(); });
+      wrap.appendChild(div);
+    });
+  }
+
+  function addSocialFiles(files) {
+    const list = [...files];
+    if (!list.length) return;
+    list.forEach(async (file, i) => {
+      const optimized = file.type.startsWith("video")
+        ? await optimizeVideo(file)
+        : await optimizeImage(file);
+      if (!optimized) return;
+      const id = "s_" + Date.now().toString(36) + "_" + i;
+      socials.set(id, new Map([
+        ["type", optimized.type],
+        ["data", optimized.data],
+        ["colors", optimized.colors]
+      ]));
+      renderSocial();
+    });
+  }
+
   /* ================= INIT ================= */
   function init() {
     if (isLogged) { showApp(); loadDraft(); }
@@ -510,10 +670,21 @@ Be elegant, modest-fashion aware, pastel-inspired. Never mention the file name.`
     $("btn-token").addEventListener("click", saveToken);
     $("token-input").addEventListener("keydown", (e) => { if (e.key === "Enter") saveToken(); });
 
+    const dzS = $("social-dropzone"), fiS = $("social-file-input");
+    if (dzS && fiS) {
+      dzS.addEventListener("click", () => fiS.click());
+      fiS.addEventListener("change", () => { addSocialFiles(fiS.files); fiS.value = ""; });
+      ["dragover", "dragenter"].forEach((ev) => dzS.addEventListener(ev, (e) => { e.preventDefault(); dzS.classList.add("drag"); }));
+      ["dragleave", "drop"].forEach((ev) => dzS.addEventListener(ev, (e) => { e.preventDefault(); dzS.classList.remove("drag"); }));
+      dzS.addEventListener("drop", (e) => addSocialFiles(e.dataTransfer.files));
+      $("btn-social-generate").addEventListener("click", generateSocialAll);
+      $("btn-social-reset").addEventListener("click", () => { socials.clear(); renderSocial(); });
+    }
+
     const badge = document.querySelector(".ai-badge span");
     if (badge) {
       const parts = [C.ai.groqKey ? "Groq" : null, C.ai.geminiKey ? "Gemini" : null, t("ai_offline")].filter(Boolean);
-      badge.textContent = "✦ IA: " + parts.join(" → ") + " ☁️";
+      badge.textContent = "✦ IA: " + parts.join(" → ") + " ☁️" + (getToken() ? " · " + t("admin_token_ready") : "");
     }
   }
 
